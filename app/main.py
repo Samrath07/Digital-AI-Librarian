@@ -1,10 +1,9 @@
 from fastapi import FastAPI
-from routers import books
+from app.routers import books
 
 
-app = FastAPI("Digital AI Librarian", 
-              version="1.0.0", 
-              description="Digital AI Librarian is an AI powered application"
-              )
+app = FastAPI(title="Digital AI Librarian", 
+              description="Digital AI Librarian is an AI powered application",
+              version="1.0.0")
 
-app.include.router(books, prefix="/books", tags=["Books"])
+app.include_router(books.router)
