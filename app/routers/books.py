@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from app.database.database import get_db
 from app.schemas.book_schema import BookResponse
 from app.models.book import Book
+from app.crud.books import fetch_books
 
 
 router = APIRouter(prefix='/books', tags=['Books'])
