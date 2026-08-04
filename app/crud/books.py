@@ -3,6 +3,9 @@ from app.schemas.book_schema import BookResponse
 from fastapi import HTTPException, status
 from sqlalchemy import select 
 from app.models.book import Book
+import os
+
+
 
 async def fetch_books(db: AsyncSession) -> list[BookResponse]:
     try:
