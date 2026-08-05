@@ -4,6 +4,7 @@ from app.database.database import get_db
 from app.schemas.book_schema import BookResponse
 from app.models.book import Book
 from app.crud.books import fetch_books
+from app.crud.google_books import fetch_books_from_google
 
 
 router = APIRouter(prefix='/books', tags=['Books'])
@@ -12,6 +13,13 @@ router = APIRouter(prefix='/books', tags=['Books'])
 async def get_books(db: Session = Depends(get_db)):
     try:
         books = await fetch_books(db)
+        return books
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+@router.get('/google-books', response_model=list[BookResponse], status_code=status.HTTP_200_OK)
+async def get_google_books(query: str):
+    try:
+        books = await fetch_books_from_google(query)
         return books
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
